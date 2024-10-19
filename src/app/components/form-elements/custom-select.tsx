@@ -27,12 +27,13 @@ export const CustomSelect: React.FC<Props> = ({ className, control }) => {
         Лечащий врач
       </label>
       <Controller
+      
         name="select"
         control={control}
         render={({field}) => (
           <Select
             options={options}
-            //classNamePrefix="custom-select"
+            classNamePrefix="custom-select"
             value={options.find((c) => c.value === field.value)}
             onChange={(val) => field.onChange(val?.value)}
             placeholder="Выберите врача"

@@ -53,7 +53,7 @@ export const InputFIO: React.FC<Props> = ({
             inputProps={{
               placeholder: "Иванов Иван Иванович",
               className:
-                "w-full px-2 py-2 border rounded-md border-sky-500 hover:border-sky-900 focus:border-sky-300",
+                "w-full px-2 py-2 border rounded-md border-sky-500 hover:border-gray-400 focus:border-sky-300",
               id: label,
             }}
           />

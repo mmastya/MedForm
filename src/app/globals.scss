@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
@@ -15,18 +13,4 @@ body {
   }
 }
 
-.custom-select {
-  &__control {
-      border: 1px !important;
-      border-color: rgb(14 165 233) !important;
-      border-radius: 6px !important;
-      
-    &:hover {
-        border-color: "#004A6E" !important;
-    }
-  
-    &:focus {
-        border-color: "#7DD3FC" !important;
-    }
-  }
-}
+@import './styles/custom-select.scss'

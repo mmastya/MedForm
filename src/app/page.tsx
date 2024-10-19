@@ -1,24 +1,26 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { SuccessNotification } from "./shared/notification";
+import { Notification } from "./shared/notification";
 import { Form } from "./components/form-elements/form";
 
 export default function Home() {
-  const [success, setSuccess] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean | null>(null);
 
   useEffect(() => {
     setTimeout(() => {
-      if (success) {
-        setSuccess(false);
+      if (success !== null) {
+        setSuccess(null);
       }
-    }, 8000);
+    }, 5000);
   }, [success]);
 
   return (
     <div>
       <Form setSuccess={setSuccess} />
-      {success && <SuccessNotification text="Новый клиент успешно создан" />}
+      {success === true && (
+        <Notification message="Новый клиент успешно создан" />
+      )}
     </div>
   );
 }

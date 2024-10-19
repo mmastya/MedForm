@@ -35,9 +35,16 @@ export const CustomMultiSelect: React.FC<Props> = ({
       <Controller
         name="multiselect"
         control={control}
+        rules={{
+          required: {
+            value: true,
+            message: "Заполните обязательное поле",
+          },
+        }}
         render={({ field }) => (
           <>
             <Select
+              classNamePrefix={errors.multiselect?.message ? "custom-select-error" : "custom-select"}
               value={options.filter(
                 (opt) => field.value.indexOf(opt.value) >= 0
               )}
@@ -47,14 +54,13 @@ export const CustomMultiSelect: React.FC<Props> = ({
               placeholder="Выберите клиентов"
               id="clients"
             />
-            {errors.multiselect?.type === "required" && (
+            {errors.multiselect?.message && (
               <div className="text-rose-600 text-sm">
-                Заполните обязательное поле
+                {errors.multiselect?.message}
               </div>
             )}
           </>
         )}
-        rules={{ required: true }}
       />
     </div>
   );

@@ -21,7 +21,12 @@ export const InputDate: React.FC<Props> = ({
     <Controller
       control={control}
       name="date"
-      rules={{ required: true }}
+      rules={{
+        required: {
+          value: true,
+          message: "Заполните обязательное поле",
+        },
+      }}
       render={({ field: { onChange, value } }) => (
         <Input
           value={value}
@@ -29,7 +34,7 @@ export const InputDate: React.FC<Props> = ({
           type={type}
           label={label}
           className={className}
-          errors={errors}
+          errorMessage={errors.date?.message}
         />
       )}
     />

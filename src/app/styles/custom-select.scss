@@ -1,0 +1,25 @@
+.custom-select{
+    &__control {
+        border: 1px !important;
+        border-style: solid !important;
+        border-color: rgb(14 165 233) !important;
+        border-radius: 6px !important; 
+
+        &:hover {
+            border-color: rgb(156 163 175) !important;
+        }
+      
+        &:focus {
+            border-color: rgb(125 211 252) !important;
+        }
+    }
+}
+
+.custom-select-error {
+    &__control {
+        border: 1px !important;
+        border-style: solid !important;
+        border-color: rgb(251 113 133) !important;
+        border-radius: 6px !important; 
+    }
+}

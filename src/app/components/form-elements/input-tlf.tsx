@@ -20,30 +20,27 @@ export const InputTLF: React.FC<Props> = ({
   control,
   errors,
 }) => {
-
-  const isValid = (e: ChangeEvent<HTMLInputElement>) => {
-    const regex = /^[0-9\W]*$/;
-    
-    if (regex.test(e.target.value)) {
-      return e.target.value;
-    }
-  };
-
   return (
     <Controller
       name="tel"
       control={control}
-      rules={{ required: true, pattern: /^[0-9\W]*$/}}
+      rules={{
+        required: {
+          value: true,
+          message: "Заполните обязательное поле",
+        },
+        pattern: /^[0-9\W]*$/,
+      }}
       render={({ field: { onChange, value } }) => (
         <Input
           value={value}
-          onChange={(val) => onChange(isValid(val))}
+          onChange={(value) => onChange(value)}
           type={type}
           label={label}
           autoComplete={autoComplete}
           className={className}
           placeholder="+7(999)-999-99-99"
-          errors={errors}
+          errorMessage={errors.tel?.message}
         />
       )}
     />
