@@ -7,12 +7,10 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
-    },
+    screens: {
+      'tablet': '768px',
+      'desktop': '1024px',
+    }
   },
   plugins: [],
 };
