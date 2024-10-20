@@ -1,5 +1,6 @@
-import { Input } from "@/app/shared/input";
+import { Input } from "@/app/components/shared/input";
 import { Control, Controller, FieldErrors } from "react-hook-form";
+import { FormValidation } from "../shared/types/form-validation";
 import { FieldValues } from "./form";
 
 interface Props {
@@ -17,6 +18,15 @@ export const InputDate: React.FC<Props> = ({
   control,
   errors,
 }) => {
+  let validation: FormValidation;
+
+  if (errors.date?.message) {
+    validation = {
+      type: "error",
+      message: errors.date.message,
+    };
+  }
+
   return (
     <Controller
       control={control}
@@ -34,7 +44,7 @@ export const InputDate: React.FC<Props> = ({
           type={type}
           label={label}
           className={className}
-          errorMessage={errors.date?.message}
+          validation={validation}
         />
       )}
     />

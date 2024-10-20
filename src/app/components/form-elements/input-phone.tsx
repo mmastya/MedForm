@@ -1,7 +1,7 @@
-import { Input } from "@/app/shared/input";
+import { Input } from "@/app/components/shared/input";
 import { Control, Controller, FieldErrors } from "react-hook-form";
+import { FormValidation } from "../shared/types/form-validation";
 import { FieldValues } from "./form";
-import { ChangeEvent } from "react";
 
 interface Props {
   type: string;
@@ -12,7 +12,7 @@ interface Props {
   errors: FieldErrors<FieldValues>;
 }
 
-export const InputTLF: React.FC<Props> = ({
+export const InputPhone: React.FC<Props> = ({
   type,
   label,
   autoComplete,
@@ -20,16 +20,25 @@ export const InputTLF: React.FC<Props> = ({
   control,
   errors,
 }) => {
+  let validation: FormValidation;
+
+  if (errors.phone?.message) {
+    validation = {
+      type: "error",
+      message: errors.phone.message,
+    };
+  }
+
   return (
     <Controller
-      name="tel"
+      name="phone"
       control={control}
       rules={{
-        required: {
-          value: true,
-          message: "Заполните обязательное поле",
+        required: "Заполните обязательное поле",
+        pattern: {
+          value: /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/,
+          message: "Введите корректный номер телефона",
         },
-        pattern: /^[0-9\W]*$/,
       }}
       render={({ field: { onChange, value } }) => (
         <Input
@@ -40,7 +49,7 @@ export const InputTLF: React.FC<Props> = ({
           autoComplete={autoComplete}
           className={className}
           placeholder="+7(999)-999-99-99"
-          errorMessage={errors.tel?.message}
+          validation={validation}
         />
       )}
     />

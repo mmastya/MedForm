@@ -6,32 +6,31 @@ import { CustomMultiSelect } from "./custom-multiselect";
 import { CustomSelect } from "./custom-select";
 import { InputDate } from "./input-date";
 import { InputFIO } from "./input-fio";
-import { InputTLF } from "./input-tlf";
 import { RadioGender } from "./radio-gender";
-import { DaDataFio, DaDataSuggestion } from "react-dadata";
+import { InputPhone } from "./input-phone";
 
 type Props = {
   setSuccess: (value: boolean) => void;
-}
+};
 
 export type FieldValues = {
-  fio: DaDataSuggestion<DaDataFio> | "";
+  fio?: string;
   date: string;
-  tel: string;
+  phone: string;
   gender: string;
   multiselect: Array<string>;
   select: string;
-  checkbox: boolean;
+  noSMS: boolean;
 };
 
-const defaultValues = {
-  fio: '',
+const defaultValues: FieldValues = {
+  fio: undefined,
   date: "",
-  tel: "",
+  phone: "",
   gender: "",
   multiselect: [],
   select: "",
-  checkbox: false,
+  noSMS: false,
 };
 
 export const Form: React.FC<Props> = ({ setSuccess }) => {
@@ -39,17 +38,16 @@ export const Form: React.FC<Props> = ({ setSuccess }) => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<FieldValues>({
-    defaultValues: defaultValues,
-  });
+  } = useForm<FieldValues>({ defaultValues });
 
-  const onSubmit: SubmitHandler<FieldValues> = () => {
-    setSuccess(true)
+  const onSubmit: SubmitHandler<FieldValues> = (form) => {
+    setSuccess(true);
+    console.log(form);
   };
 
   const onError: SubmitErrorHandler<FieldValues> = (errors) => {
-    setSuccess(false)
-    console.log(errors)
+    setSuccess(false);
+    console.log(errors);
   };
 
   return (
@@ -74,9 +72,9 @@ export const Form: React.FC<Props> = ({ setSuccess }) => {
       </div>
 
       <div className="tablet:flex tablet:flex-row">
-        <InputTLF
+        <InputPhone
           label="Номер телефона"
-          type="tel"
+          type="phone"
           className="tablet:w-[50%] tablet:mr-3"
           control={control}
           errors={errors}

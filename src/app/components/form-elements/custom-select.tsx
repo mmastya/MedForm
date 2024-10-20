@@ -1,7 +1,7 @@
-import React from "react";
-import Select from "react-select";
 import cn from "classnames";
+import React from "react";
 import { Control, Controller } from "react-hook-form";
+import Select from "react-select";
 import { FieldValues } from "./form";
 
 interface IOption {
@@ -27,10 +27,9 @@ export const CustomSelect: React.FC<Props> = ({ className, control }) => {
         Лечащий врач
       </label>
       <Controller
-      
         name="select"
         control={control}
-        render={({field}) => (
+        render={({ field }) => (
           <Select
             options={options}
             classNamePrefix="custom-select"

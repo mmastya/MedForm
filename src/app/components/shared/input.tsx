@@ -1,16 +1,16 @@
-import { ChangeEventHandler } from "react";
 import cn from "classnames";
+import { ChangeEventHandler } from "react";
+import { FormValidation } from "./types/form-validation";
 
 interface Props {
   className?: string;
   type: string;
   label: string;
-  validationMassage?: string;
   placeholder?: string;
   value?: string;
   onChange?: ChangeEventHandler<HTMLInputElement> | undefined;
   autoComplete?: string;
-  errorMessage?: string;
+  validation?: FormValidation;
 }
 
 export const Input: React.FC<Props> = ({
@@ -21,7 +21,7 @@ export const Input: React.FC<Props> = ({
   value,
   autoComplete,
   onChange,
-  errorMessage,
+  validation,
 }) => {
   return (
     <div className={cn("flex flex-col mb-5", className)}>
@@ -36,13 +36,15 @@ export const Input: React.FC<Props> = ({
         id={label}
         autoComplete={autoComplete}
         className={
-          errorMessage
+          validation?.type === "error"
             ? "w-full px-2 py-2 border rounded-md border-rose-600"
+            : validation?.type === "warning"
+            ? "w-full px-2 py-2 border rounded-md border-yellow-600"
             : "w-full px-2 py-2 border rounded-md border-sky-500 hover:border-gray-400 focus:border-sky-300"
         }
       />
-      {errorMessage && (
-        <div className="text-rose-600 text-sm">{errorMessage}</div>
+      {validation && (
+        <div className="text-rose-600 text-sm">{validation.message}</div>
       )}
     </div>
   );

@@ -1,4 +1,4 @@
-import { Controller, Control } from "react-hook-form";
+import { Control, Controller } from "react-hook-form";
 import { FieldValues } from "./form";
 
 interface Props {
@@ -13,7 +13,7 @@ export const Checkbox: React.FC<Props> = ({ label, control }) => {
         {label}
       </label>
       <Controller
-        name="checkbox"
+        name="noSMS"
         control={control}
         render={({ field }) => (
           <input

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Notification } from "./shared/notification";
+import { Notification } from "./components/shared/notification";
 import { Form } from "./components/form-elements/form";
 
 export default function Home() {
