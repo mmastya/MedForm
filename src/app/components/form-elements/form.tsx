@@ -8,6 +8,7 @@ import { InputDate } from "./input-date";
 import { InputFIO } from "./input-fio";
 import { RadioGender } from "./radio-gender";
 import { InputPhone } from "./input-phone";
+import { Button } from "./button";
 
 type Props = {
   setSuccess: (value: boolean) => void;
@@ -32,6 +33,24 @@ const defaultValues: FieldValues = {
   select: "",
   noSMS: false,
 };
+
+export interface IOption {
+  value: string;
+  label: string;
+}
+
+const doctors: IOption[] = [
+  { value: "Петров", label: "Петров" },
+  { value: "Захаров", label: "Захаров" },
+  { value: "Черниговская", label: "Черниговская" },
+];
+
+const clients: IOption[] = [
+  { value: "VIP", label: "VIP" },
+  { value: "Проблемные", label: "Проблемные" },
+  { value: "ОМС", label: "ОМС" },
+  { value: "ДМС", label: "ДМС" },
+];
 
 export const Form: React.FC<Props> = ({ setSuccess }) => {
   const {
@@ -90,18 +109,22 @@ export const Form: React.FC<Props> = ({ setSuccess }) => {
           className="tablet:w-[50%] tablet:mr-3"
           control={control}
           errors={errors}
+          options={clients}
+          title="Группа клиентов"
+          placeholder="Выберите клиентов"
         />
-        <CustomSelect className="tablet:w-[50%]" control={control} />
+        <CustomSelect
+          className="tablet:w-[50%]"
+          control={control}
+          options={doctors}
+          title="Лечащий врач"
+          placeholder="Выберите врача"
+        />
       </div>
 
       <Checkbox label="Не отправлять СМС" control={control} />
 
-      <button
-        type="submit"
-        className="flex text-sky-900 border rounded-md border-sky-500 mt-5 mx-auto px-2 py-2 hover:bg-sky-50 focus:bg-sky-300"
-      >
-        Подтвердить данные
-      </button>
+      <Button title="Подтвердить данные"/>
     </form>
   );
 };

@@ -2,29 +2,21 @@ import cn from "classnames";
 import React from "react";
 import { Control, Controller } from "react-hook-form";
 import Select from "react-select";
-import { FieldValues } from "./form";
-
-interface IOption {
-  value: string;
-  label: string;
-}
+import { FieldValues, IOption } from "./form";
 
 interface Props {
   className?: string;
   control: Control<FieldValues>;
+  options: IOption[];
+  title: string;
+  placeholder: string
 }
 
-const options: IOption[] = [
-  { value: "Петров", label: "Петров" },
-  { value: "Захаров", label: "Захаров" },
-  { value: "Черниговская", label: "Черниговская" },
-];
-
-export const CustomSelect: React.FC<Props> = ({ className, control }) => {
+export const CustomSelect: React.FC<Props> = ({ className, control, options, title, placeholder}) => {
   return (
     <div className={cn("flex flex-col mb-5", className)}>
-      <label htmlFor="doctor" className="text-sky-900">
-        Лечащий врач
+      <label htmlFor={title} className="text-sky-900">
+        {title}
       </label>
       <Controller
         name="select"
@@ -35,8 +27,8 @@ export const CustomSelect: React.FC<Props> = ({ className, control }) => {
             classNamePrefix="custom-select"
             value={options.find((c) => c.value === field.value)}
             onChange={(val) => field.onChange(val?.value)}
-            placeholder="Выберите врача"
-            id="doctor"
+            placeholder={placeholder}
+            id={title}
           />
         )}
       />
