@@ -1,5 +1,4 @@
 import cn from "classnames";
-import { useEffect, useRef } from "react";
 import { FioSuggestions } from "react-dadata";
 import "react-dadata/dist/react-dadata.css";
 import { Control, Controller, FieldErrors } from "react-hook-form";
@@ -20,10 +19,8 @@ export const InputFIO: React.FC<Props> = ({
   control,
   errors,
 }) => {
-  const inputRef = useRef(null);
-
-  useEffect(() => {});
-
+  const token = process.env.NEXT_PUBLIC_DADATA_TOKEN;
+  
   return (
     <Controller
       control={control}
@@ -31,18 +28,16 @@ export const InputFIO: React.FC<Props> = ({
       rules={{
         required: "Заполните обязательное поле",
         validate: (value?: string) => {
-          return fioRegExp.test(value ?? "")
-            ? true
-            : "Введите корректное ФИО";
+          return fioRegExp.test(value ?? "") ? true : "Введите корректное ФИО";
         },
       }}
       render={({ field: { onChange } }) => (
-        <div ref={inputRef} className={cn("mb-5", className)}>
+        <div className={cn("mb-5", className)}>
           <label htmlFor={label} className="text-sky-900">
             {label}
           </label>
           <FioSuggestions
-            token="d789e199129679755769099b8e2a71571edbbc52"
+            token={token as string}
             minChars={2}
             delay={500}
             onChange={(daDataValue) => {
